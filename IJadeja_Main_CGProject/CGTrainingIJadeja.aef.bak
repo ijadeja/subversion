@@ -1,0 +1,41 @@
+﻿
+
+form "CI_OutcomeCategoryCI_Category" for "CI_OutcomeCategory" 250,150
+{
+	"CI_Category" form member "Category" tag ENU "" 0,0,250(100),150(100)
+}
+
+form "CI_OutcomeCategoryCI_Outcome" for "CI_OutcomeCategory" 250,150
+{
+	"CI_Outcome" form member "Outcome" tag ENU "" 0,0,250(100),150(100)
+}
+
+form "CI_ReadIssuestdUser" for "CI_ReadIssue" 250,150
+{
+	"stdUser" form member "stdUser" tag ENU "" 0,0,250(100),150(100)
+}
+
+form "CI_ReadIssueCI_Issue" for "CI_ReadIssue" 250,150
+{
+	"CI_Issue" form member "Issue" tag ENU "" 0,0,250(100),150(100)
+}
+
+form "AS_UserAssignmentsstdUser" for "AS_UserAssignments" 250,150
+{
+	"stdUser" form member "Rep" tag ENU "" 0,0,250(100),150(100)
+}
+
+form "AS_UserAssignmentsAS_Territory" for "AS_UserAssignments" 250,150
+{
+	"AS_Territory" form member "Territory" tag ENU "" 0,0,250(100),150(100)
+}
+
+form "AS_TerritoryAssignmentStore" for "AS_TerritoryAssignment" 250,150
+{
+	"Store" form member "Assignee" tag ENU "" 0,0,250(100),150(100)
+}
+
+form "AS_TerritoryAssignmentAS_Territory" for "AS_TerritoryAssignment" 250,150
+{
+	"AS_Territory" form member "Territory" tag ENU "" 0,0,250(100),150(100)
+}

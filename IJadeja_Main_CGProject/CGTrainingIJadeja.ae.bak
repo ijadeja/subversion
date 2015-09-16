@@ -1,0 +1,1492 @@
+﻿// Active Elk definition file generated from binary format
+// Date:	2015-09-17 01:03:46
+// User:	Administrator
+
+library "CGTrainingIJadeja"
+{
+uses "stdbaseentities"
+noautoindex
+aspect "Elk9.Aspect" "CGTrainingIJadeja"
+
+class "CI_Type" from "stdPicklist" embedded
+{
+	title(Singular) ENU "CI_Type"
+}
+
+class "CI_Category" from "stdPicklist" embedded
+{
+	title(Singular) ENU "Category"
+	members
+	{
+		"Type" join "CI_Type"
+		{
+			title(Singular) ENU "Type"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Categories"
+			{
+				title(Singular) ENU "CI_Categories"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "CI_Type"
+			}
+		}
+	}
+	index "{130DDF08-2D12-41FF-A214-EC0EA24647A5}"
+		on "CI_Type"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+}
+
+class "CI_Subcategory" from "stdPicklist" embedded
+{
+	title(Singular) ENU "Sub Category"
+	members
+	{
+		"Category" join "CI_Category"
+		{
+			title(Singular) ENU "Category"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Subcategories"
+			{
+				title(Singular) ENU "CI_Subcategories"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "CI_Category"
+			}
+		}
+	}
+	index "{33596A0F-E055-4D6A-B0A5-AF25FA98339B}"
+		on "Category"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+}
+
+class "CI_Issue"
+{
+	title(Singular) ENU "Issue"
+	members
+	{
+		"Description" data LongVarChar
+		{
+			title(Singular) ENU "Description"
+			default "\"\""
+		}
+		"Notes" data LongVarChar
+		{
+			title(Singular) ENU "Notes"
+			default "\"\""
+		}
+		"IssueOpened" data TimeStamp
+		{
+			title(Singular) ENU "Issue Opened"
+			default "0"
+		}
+		"IssueClosed" data TimeStamp
+		{
+			title(Singular) ENU "Issue Closed"
+			default "0"
+		}
+		"InkNotes" data LongVarChar
+		{
+			title(Singular) ENU "Ink Notes"
+			default "\"\""
+		}
+		"DescriptionInkNotes" data LongVarChar
+		{
+			title(Singular) ENU "Description Ink Notes"
+			default "\"\""
+		}
+		"Title" data VarChar(30)
+		{
+			title(Singular) ENU "Title"
+			default "\"\""
+		}
+		"RecordStamp" class "stdRecordStamp" embedded
+		{
+			title(Singular) ENU "Record Stamp"
+		}
+		"Type" join "CI_Type"
+		{
+			title(Singular) ENU "Type"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Issues"
+			{
+				title(Singular) ENU "CI_Issues"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "CI_Type"
+			}
+		}
+		"Status" join "CI_Status"
+		{
+			title(Singular) ENU "Status"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Issues"
+			{
+				title(Singular) ENU "CI_Issues"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "CI_Status"
+			}
+		}
+		"Outcome" join "CI_Outcome"
+		{
+			title(Singular) ENU "Outcome"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Issues"
+			{
+				title(Singular) ENU "CI_Issues"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "CI_Outcome"
+			}
+		}
+		"Subcategory" join "CI_Subcategory"
+		{
+			title(Singular) ENU "Subcategory"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Issues"
+			{
+				title(Singular) ENU "CI_Issues"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "CI_Subcategory"
+			}
+		}
+		"Category" join "CI_Category"
+		{
+			title(Singular) ENU "Category"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Issues"
+			{
+				title(Singular) ENU "CI_Issues"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "CI_Category"
+			}
+		}
+		"AssignedTo" join "stdUser"
+		{
+			title(Singular) ENU "Assigned To"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Issues"
+			{
+				title(Singular) ENU "CI_Issues"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "stdUser"
+			}
+		}
+		"Organization" join "Store"
+		{
+			title(Singular) ENU "Organization"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Issues"
+			{
+				title(Singular) ENU "CI_Issues"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "Store"
+			}
+		}
+	}
+	index "{E227C745-5544-4BFE-AC3A-54923F4D3488}"
+		on "Type"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{252CAE92-BD17-43FB-A200-B71890E05014}"
+		on "Status"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{52137E33-A0F5-46C0-BDFB-DDAE773FD69E}"
+		on "Outcome"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{6E384FAF-0660-4294-834B-AE133CA8A075}"
+		on "Catagory"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{EFCE586B-42C0-4BC1-A3E0-36DDBB57ED1E}"
+		on "Subcategory"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{F6479FE6-DAD1-4E9C-A536-985D123F0279}"
+		on "AssignedTo"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{9F2FC38B-C327-411B-B4AC-BA7B38055F45}"
+		on "Organization"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+}
+
+class "CI_History"
+{
+	title(Singular) ENU "History"
+	members
+	{
+		"Discription" data LongVarChar
+		{
+			title(Singular) ENU "Discription"
+			default "\"\""
+		}
+		"RecordStamp" class "stdRecordStamp" embedded
+		{
+			title(Singular) ENU "Record Stamp"
+		}
+		"Issue" join "CI_Issue"
+		{
+			title(Singular) ENU "Issue"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Histories"
+			{
+				title(Singular) ENU "CI_Histories"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "CI_Issue"
+			}
+		}
+		"Status" join "CI_Status"
+		{
+			title(Singular) ENU "Status"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "CI_Histories"
+			{
+				title(Singular) ENU "CI_Histories"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "CI_Status"
+			}
+		}
+	}
+	index "{801739E2-390F-4702-9B01-BC9AC53041E6}"
+		on "Issue"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{70AF6047-83B7-45F0-9B26-575DAE0AA9A6}"
+		on "Status"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+}
+
+class "CI_Outcome" from "stdPicklist" embedded
+{
+	title(Singular) ENU "Outcome"
+}
+
+class "CI_Status" from "stdPicklist" embedded
+{
+	title(Singular) ENU "Status"
+	members
+	{
+		"Open" data VarChar(30)
+		{
+			title(Singular) ENU "Open"
+			default "\"\""
+		}
+	}
+}
+
+class "CI_OutcomeCategory"
+{
+	title(Singular) ENU "Outcomecategory"
+	properties
+	{
+		"ContextTitles" 0
+			properties
+			{
+				"CI_Category" 0
+					title(Singular) ENU "CI_Category"
+				"CI_Outcome" 0
+					title(Singular) ENU "CI_Outcome"
+			}
+		"FormChoose" 0
+			properties
+			{
+				"CI_OutcomeCategoryCI_Category" "false"
+					properties
+					{
+						"Context" "CI_Category"
+					}
+				"CI_OutcomeCategoryCI_Outcome" "false"
+					properties
+					{
+						"Context" "CI_Outcome"
+					}
+			}
+	}
+	members
+	{
+		"Category" join "CI_Category"
+		{
+			title(Singular) ENU "Category"
+			properties
+			{
+				"NewWizard" True
+				"FoldTarget" True
+			}
+			ontargetdelete delete
+			
+			folder "CI_Outcomes" context "CI_Outcome"
+			{
+				title(Singular) ENU "CI_Outcome"
+			}
+			choose folder 
+			{
+			}
+		}
+		"Outcome" join "CI_Outcome"
+		{
+			title(Singular) ENU "Outcome"
+			properties
+			{
+				"NewWizard" True
+				"FoldTarget" True
+			}
+			ontargetdelete delete
+			
+			folder "CI_Categories" context "CI_Category"
+			{
+				title(Singular) ENU "CI_Category"
+			}
+			choose folder 
+			{
+			}
+		}
+	}
+	index "{45E880BB-15FA-47EE-BA65-7F97CFBA613B}"
+		on "CI_Category"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{BA447B33-FD20-45BE-A8DE-AD5306C0BD25}"
+		on "CI_Outcome"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	prompt ""
+		ENU "CI_Category.prompt&' '&CI_Outcome.prompt"
+	prompt "CI_Category"
+		ENU "CI_Category.Prompt"
+	prompt "CI_Outcome"
+		ENU "CI_Outcome.Prompt"
+	icon "CI_Category"
+		ENU "CI_Category.Icon"
+	icon "CI_Outcome"
+		ENU "CI_Outcome.Icon"
+}
+
+class "CI_ReadIssue"
+{
+	title(Singular) ENU "Read Issue"
+	properties
+	{
+		"ContextTitles" 0
+			properties
+			{
+				"stdUser" 0
+					title(Singular) ENU "stdUser"
+				"CI_Issue" 0
+					title(Singular) ENU "CI_Issue"
+			}
+		"FormChoose" 0
+			properties
+			{
+				"CI_ReadIssuestdUser" "false"
+					properties
+					{
+						"Context" "stdUser"
+					}
+				"CI_ReadIssueCI_Issue" "false"
+					properties
+					{
+						"Context" "CI_Issue"
+					}
+			}
+	}
+	members
+	{
+		"stdUser" join "stdUser"
+		{
+			title(Singular) ENU "User"
+			properties
+			{
+				"NewWizard" True
+				"FoldTarget" True
+			}
+			ontargetdelete delete
+			
+			folder "CI_Issues_2" context "CI_Issue"
+			{
+				title(Singular) ENU "CI_Issue"
+			}
+			choose folder 
+			{
+			}
+		}
+		"Issue" join "CI_Issue"
+		{
+			title(Singular) ENU "Issue"
+			properties
+			{
+				"NewWizard" True
+				"FoldTarget" True
+			}
+			ontargetdelete delete
+			
+			folder "stdUsers" context "stdUser"
+			{
+				title(Singular) ENU "stdUser"
+			}
+			choose folder 
+			{
+			}
+		}
+	}
+	index "{44D2BE7C-3969-4F29-A649-F8AB8488AC40}"
+		on "stdUser"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{63C97A5D-116E-41FC-8732-39634408FDFB}"
+		on "CI_Issue"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	prompt ""
+		ENU "stdUser.prompt&' '&CI_Issue.prompt"
+	prompt "stdUser"
+		ENU "stdUser.Prompt"
+	prompt "CI_Issue"
+		ENU "CI_Issue.Prompt"
+	icon "stdUser"
+		ENU "stdUser.Icon"
+	icon "CI_Issue"
+		ENU "CI_Issue.Icon"
+}
+
+class "Store"
+{
+	title(Singular) ENU "Store"
+	members
+	{
+		"Name" data VarChar(30)
+		{
+			title(Singular) ENU "Name"
+			default "\"\""
+		}
+		"WWW" class "stdWWWAddress" embedded
+		{
+			title(Singular) ENU "WWW"
+		}
+		"Phone" class "stdPhoneNumber" embedded
+		{
+			title(Singular) ENU "Phone"
+		}
+		"stdFaxActivity" class "stdFaxActivity" embedded
+		{
+			title(Singular) ENU "stdFaxActivity"
+		}
+		"stdeMailAddress" class "stdeMailAddress" embedded
+		{
+			title(Singular) ENU "stdeMailAddress"
+		}
+		"stdAddress" class "stdAddress" embedded
+		{
+			title(Singular) ENU "stdAddress"
+		}
+		"LegalName" data VarChar(30)
+		{
+			title(Singular) ENU "Legal Name"
+			default "\"\""
+		}
+		"ExternalID" data VarChar(30)
+		{
+			title(Singular) ENU "External ID"
+			default "\"\""
+		}
+		"TerminationDate" data TimeStamp
+		{
+			title(Singular) ENU "Termination Date"
+		}
+		"Terminated" data Bit
+		{
+			title(Singular) ENU "Terminated"
+			default "0"
+		}
+		"AddedDate" data TimeStamp
+		{
+			title(Singular) ENU "Added Date"
+		}
+	}
+}
+
+class "LocationVisit"
+{
+	title(Singular) ENU "Location Visit"
+	members
+	{
+		"stdTimeStamp" class "stdTimeStamp" embedded
+		{
+			title(Singular) ENU "stdTimeStamp"
+		}
+		"ActualTime" class "stdTimeStamp" embedded
+		{
+			title(Singular) ENU "Actual Time"
+		}
+		"Store" join "Store"
+		{
+			title(Singular) ENU "Store"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "LocationVisits"
+			{
+				title(Singular) ENU "LocationVisits"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "Store"
+			}
+		}
+		"Consultant" join "stdUser"
+		{
+			title(Singular) ENU "Consultant"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "LocationVisits"
+			{
+				title(Singular) ENU "LocationVisits"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "stdUser"
+			}
+		}
+		"Status" join "pikActivityStatus"
+		{
+			title(Singular) ENU "Status"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "LocationVisits"
+			{
+				title(Singular) ENU "LocationVisits"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "pikActivityStatus"
+			}
+		}
+		"CallType" join "pikCallType"
+		{
+			title(Singular) ENU "Call type"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "LocationVisits"
+			{
+				title(Singular) ENU "LocationVisits"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "pikCallType"
+			}
+		}
+	}
+	index "{C3450935-D24F-476B-AD3C-DC63BFC7BBBD}"
+		on "Store"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{8D8DC331-E493-42FA-BABD-09B028ABB63C}"
+		on "Consultant"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{810460F8-CBDF-41F6-A979-51E7CD1A1A97}"
+		on "Status"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{310BA201-6D12-45F8-B0B0-76145FEE9B4A}"
+		on "CallType"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+}
+
+class "pikCallType" from "stdPicklist" embedded
+{
+	title(Singular) ENU "Pik Call Type"
+}
+
+class "pikActivityStatus" from "stdPicklist" embedded
+{
+	title(Singular) ENU "Pik Activity Status"
+}
+
+class "AS_Territory"
+{
+	title(Singular) ENU "AS Territory"
+	members
+	{
+		"TerritoryName" data VarChar(10)
+		{
+			title(Singular) ENU "Territory Name"
+		}
+		"ExternalID" data VarChar(10)
+		{
+			title(Singular) ENU "ExternalID"
+		}
+		"PrimaryRep" join "stdUser"
+		{
+			title(Singular) ENU "Primary rep"
+			properties
+			{
+				"NewWizard" True
+					properties
+					{
+						"Mode" 1
+					}
+			}
+			ontargetdelete delete
+			
+			folder "AS_Territories_2"
+			{
+				title(Singular) ENU "AS_Territories"
+			}
+			choose folder 
+			{
+				title(Singular) ENU "stdUser"
+			}
+		}
+	}
+	index "{3509F5D0-B412-4BC0-897B-8E770CE53E8D}"
+		on "PrimaryRep"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+}
+
+class "AS_UserAssignments"
+{
+	title(Singular) ENU "AS_User assignments"
+	properties
+	{
+		"ContextTitles" 0
+			properties
+			{
+				"stdUser" 0
+					title(Singular) ENU "stdUser"
+				"AS_Territory" 0
+					title(Singular) ENU "AS_Territory"
+			}
+		"FormChoose" 0
+			properties
+			{
+				"AS_UserAssignmentsstdUser" "false"
+					properties
+					{
+						"Context" "stdUser"
+					}
+				"AS_UserAssignmentsAS_Territory" "false"
+					properties
+					{
+						"Context" "AS_Territory"
+					}
+			}
+	}
+	members
+	{
+		"Territory" join "AS_Territory"
+		{
+			title(Singular) ENU "Territory"
+			properties
+			{
+				"NewWizard" True
+				"FoldTarget" True
+			}
+			ontargetdelete delete
+			
+			folder "stdUsers" context "stdUser"
+			{
+				title(Singular) ENU "stdUser"
+			}
+			choose folder 
+			{
+			}
+		}
+		"Rep" join "stdUser"
+		{
+			title(Singular) ENU "Rep"
+			properties
+			{
+				"NewWizard" True
+				"FoldTarget" True
+			}
+			ontargetdelete delete
+			
+			folder "AS_Territories" context "AS_Territory"
+			{
+				title(Singular) ENU "AS_Territory"
+			}
+			choose folder 
+			{
+			}
+		}
+		"ValidFrom" data TimeStamp
+		{
+			title(Singular) ENU "Valid from"
+		}
+		"ValidTo" data TimeStamp
+		{
+			title(Singular) ENU "Valid To"
+		}
+	}
+	index "{DB54C9C6-8742-4B6C-AE20-35668067D23D}"
+		on "stdUser"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{6E23EF52-E83B-4A14-88B9-2D598790AF1F}"
+		on "AS_Territory"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	prompt ""
+		ENU "stdUser.prompt&' '&AS_Territory.prompt"
+	prompt "stdUser"
+		ENU "stdUser.Prompt"
+	prompt "AS_Territory"
+		ENU "AS_Territory.Prompt"
+	icon "stdUser"
+		ENU "stdUser.Icon"
+	icon "AS_Territory"
+		ENU "AS_Territory.Icon"
+}
+
+class "AS_TerritoryAssignment"
+{
+	title(Singular) ENU "AS_Territory assignment"
+	properties
+	{
+		"ContextTitles" 0
+			properties
+			{
+				"Store" 0
+					title(Singular) ENU "Store"
+				"AS_Territory" 0
+					title(Singular) ENU "AS_Territory"
+			}
+		"FormChoose" 0
+			properties
+			{
+				"AS_TerritoryAssignmentStore" "false"
+					properties
+					{
+						"Context" "Store"
+					}
+				"AS_TerritoryAssignmentAS_Territory" "false"
+					properties
+					{
+						"Context" "AS_Territory"
+					}
+			}
+	}
+	members
+	{
+		"ValidFrom" data TimeStamp
+		{
+			title(Singular) ENU "Valid From"
+		}
+		"ValidTo" data TimeStamp
+		{
+			title(Singular) ENU "Valid To"
+		}
+		"Assignee" join "Store"
+		{
+			title(Singular) ENU "Assignee"
+			properties
+			{
+				"NewWizard" True
+				"FoldTarget" True
+			}
+			ontargetdelete delete
+			
+			folder "AS_Territories" context "AS_Territory"
+			{
+				title(Singular) ENU "AS_Territory"
+			}
+			choose folder 
+			{
+			}
+		}
+		"Territory" join "AS_Territory"
+		{
+			title(Singular) ENU "Territory"
+			properties
+			{
+				"NewWizard" True
+				"FoldTarget" True
+			}
+			ontargetdelete delete
+			
+			folder "Stores" context "Store"
+			{
+				title(Singular) ENU "Store"
+			}
+			choose folder 
+			{
+			}
+		}
+	}
+	index "{5ADC2925-0125-4C61-8A22-4755BF78CAAF}"
+		on "Store"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	index "{BC382EF0-8234-4777-B820-7716E823BEA3}"
+		on "AS_Territory"
+		configurations
+		{
+			"Server" include
+			"Remote" include
+			"Mobile" include
+		}
+	prompt ""
+		ENU "Store.prompt&' '&AS_Territory.prompt"
+	prompt "Store"
+		ENU "Store.Prompt"
+	prompt "AS_Territory"
+		ENU "AS_Territory.Prompt"
+	icon "Store"
+		ENU "Store.Icon"
+	icon "AS_Territory"
+		ENU "AS_Territory.Icon"
+}
+
+template "CGTrainingIJadeja::stdPersonName_Mod" class "stdPersonName"
+{
+}
+
+
+sysclass "CI_Type" from "CI_Type"
+{
+	
+	folder "CI_Type"
+	{
+		title(Singular) ENU "CI_Type"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "CI_Category" from "CI_Category"
+{
+	
+	folder "CI_Category"
+	{
+		title(Singular) ENU "Category"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "CI_Subcategory" from "CI_Subcategory"
+{
+	
+	folder "CI_Subcategory"
+	{
+		title(Singular) ENU "Sub Category"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "CI_Issue" from "CI_Issue"
+{
+	title(Singular) ENU "CI_Issue"
+	
+	folder "Cl_Issue"
+	{
+		title(Singular) ENU "Cl Issue"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "CI_History" from "CI_History"
+{
+}
+
+sysclass "CI_Outcome" from "CI_Outcome"
+{
+	
+	folder "CI_Outcome"
+	{
+		title(Singular) ENU "Outcome"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "CI_Status" from "CI_Status"
+{
+	
+	folder "CI_Status"
+	{
+		title(Singular) ENU "Status"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "CI_OutcomeCategory" from "CI_OutcomeCategory"
+{
+	
+	folder "IssuesOutcomeCategory"
+	{
+		title(Singular) ENU "Issues Outcome Category"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "stdUser" from "stdUser"
+{
+	
+	folder "User"
+	{
+		title(Singular) ENU "Users"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "CI_ReadIssue" from "CI_ReadIssue"
+{
+}
+
+sysclass "Store" from "Store"
+{
+	
+	folder "Store"
+	{
+		title(Singular) ENU "Store"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "LocationVisit" from "LocationVisit"
+{
+}
+
+sysclass "pikCallType" from "pikCallType"
+{
+	
+	folder "CallType"
+	{
+		title(Singular) ENU "Call Type"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "pikActivityStatus" from "pikActivityStatus"
+{
+}
+
+sysclass "AS_Territory" from "AS_Territory"
+{
+	
+	folder "AS_Territory"
+	{
+		title(Singular) ENU "AS Territory"
+		properties
+		{
+			"FolderSets" 0
+				properties
+				{
+					"User" 0
+				}
+		}
+	}
+}
+
+sysclass "AS_UserAssignments" from "AS_UserAssignments"
+{
+}
+
+sysclass "AS_TerritoryAssignment" from "AS_TerritoryAssignment"
+{
+}
+
+systemplate "CGTrainingIJadeja::stdPersonName_Mod" template "CGTrainingIJadeja::stdPersonName_Mod"
+
+}
+layout
+<%
+<?xml version="1.0" encoding="utf-8"?>
+<AeDesigner_doc version="3">
+    <class_diagram name="CGTrainingIJadeja" width="1450" height="1288" ID="{51661A54-1C45-42C3-9027-3B8A8256E54E}">
+        <class name="CI_Issue" left="677" top="502" right="811" bottom="640">
+            <member name="Description" type="data" />
+            <member name="RecordStamp" type="class" />
+            <member name="Notes" type="data" />
+            <member name="IssueOpened" type="data" />
+            <member name="IssueClosed" type="data" />
+            <member name="InkNotes" type="data" />
+            <member name="DescriptionInkNotes" type="data" />
+            <member name="Title" type="data" />
+            <hide show_base_members="1">
+                <link_in_list name="stdRecordStamp" forced="0" />
+                <link_in_list name="RecordStamp" forced="0" />
+            </hide>
+        </class>
+        <class name="stdbaseentities::stdUser" included_class="1" left="531" top="13" right="665" bottom="181">
+            <member name="ID" type="data" />
+            <member name="IsAdmin" type="data" />
+            <member name="Password" type="data" />
+            <member name="Address" type="class" />
+            <member name="Phone" type="class" />
+            <member name="Fax" type="class" />
+            <member name="Mobile" type="class" />
+            <member name="eMailAddress" type="class" />
+            <member name="DontMail" type="data" />
+            <member name="Name" type="class" />
+            <hide show_base_members="1">
+                <link_in_list name="Address" forced="0" />
+                <link_in_list name="Phone" forced="0" />
+                <link_in_list name="Fax" forced="0" />
+                <link_in_list name="Mobile" forced="0" />
+                <link_in_list name="eMailAddress" forced="0" />
+                <link_in_list name="Name" forced="0" />
+            </hide>
+        </class>
+        <class name="Store" left="83" top="169" right="217" bottom="352">
+            <member name="Name" type="data" />
+            <member name="WWW" type="class" />
+            <member name="Phone" type="class" />
+            <member name="stdFaxActivity" type="class" />
+            <member name="stdeMailAddress" type="class" />
+            <member name="stdAddress" type="class" />
+            <member name="LegalName" type="data" />
+            <member name="ExternalID" type="data" />
+            <member name="TerminationDate" type="data" />
+            <member name="Terminated" type="data" />
+            <member name="AddedDate" type="data" />
+            <hide show_base_members="1">
+                <link_in_list name="stdWWWAddress" forced="0" />
+                <link_in_list name="stdPhoneNumber" forced="0" />
+                <link_in_list name="stdFaxActivity" forced="0" />
+                <link_in_list name="stdeMailAddress" forced="0" />
+                <link_in_list name="stdAddress" forced="0" />
+                <link_in_list name="WWW" forced="0" />
+                <link_in_list name="Phone" forced="0" />
+            </hide>
+        </class>
+        <class name="LocationVisit" left="237" top="434" right="371" bottom="524">
+            <member name="stdTimeStamp" type="class" />
+            <member name="ActualTime" type="class" />
+            <member name="Store" type="join" />
+            <hide show_base_members="1">
+                <link_in_list name="stdTimeStamp" forced="0" />
+                <link_in_list name="ActualTime" forced="0" />
+                <link_in_list name="Store" forced="1" />
+            </hide>
+        </class>
+        <class name="pikCallType" left="10" top="422" right="144" bottom="512">
+            <member name="Description" type="data" />
+            <member name="ListOrder" type="data" />
+            <member name="Retired" type="data" />
+            <member name="IsDefault" type="data" />
+            <hide show_base_members="1" />
+        </class>
+        <class name="pikActivityStatus" left="15" top="558" right="149" bottom="648">
+            <member name="Description" type="data" />
+            <member name="ListOrder" type="data" />
+            <member name="Retired" type="data" />
+            <member name="IsDefault" type="data" />
+            <hide show_base_members="1" />
+        </class>
+        <class name="AS_Territory" left="828" top="298" right="962" bottom="388">
+            <member name="TerritoryName" type="data" />
+            <member name="ExternalID" type="data" />
+            <hide show_base_members="1" />
+        </class>
+        <class name="AS_UserAssignments" left="815" top="76" right="949" bottom="166">
+            <member name="ValidFrom" type="data" />
+            <member name="ValidTo" type="data" />
+            <hide show_base_members="1" />
+        </class>
+        <class name="AS_TerritoryAssignment" left="500" top="250" right="634" bottom="340">
+            <member name="ValidFrom" type="data" />
+            <member name="ValidTo" type="data" />
+            <hide show_base_members="1" />
+        </class>
+        <class name="CI_Category" left="280" top="726" right="414" bottom="816">
+            <member name="Description" type="data" />
+            <member name="ListOrder" type="data" />
+            <member name="Retired" type="data" />
+            <member name="IsDefault" type="data" />
+            <hide pos_x="101" pos_y="680" show_base_members="1" />
+        </class>
+        <class name="CI_History" left="982" top="683" right="1116" bottom="773">
+            <member name="RecordStamp" type="class" />
+            <member name="Issue" type="join" />
+            <member name="Discription" type="data" />
+            <hide pos_x="674" pos_y="931" show_base_members="1">
+                <link_in_list name="stdRecordStamp" forced="0" />
+                <link_in_list name="RecordStamp" forced="0" />
+                <link_in_list name="Issue" forced="1" />
+            </hide>
+        </class>
+        <class name="CI_Outcome" left="1009" top="880" right="1143" bottom="970">
+            <member name="Description" type="data" />
+            <member name="ListOrder" type="data" />
+            <member name="Retired" type="data" />
+            <member name="IsDefault" type="data" />
+            <hide pos_x="857" pos_y="783" show_base_members="1" />
+        </class>
+        <class name="CI_OutcomeCategory" left="652" top="840" right="786" bottom="930">
+            <hide pos_x="103" pos_y="874" show_base_members="1" />
+        </class>
+        <class name="CI_ReadIssue" left="1071" top="237" right="1205" bottom="327">
+            <hide pos_x="872" pos_y="82" show_base_members="1" />
+        </class>
+        <class name="CI_Status" left="1014" top="401" right="1148" bottom="494">
+            <member name="Open" type="data" />
+            <member name="Description" type="data" />
+            <member name="ListOrder" type="data" />
+            <member name="Retired" type="data" />
+            <member name="IsDefault" type="data" />
+            <hide pos_x="781" pos_y="405" show_base_members="1" />
+        </class>
+        <class name="CI_Subcategory" left="465" top="943" right="599" bottom="1033">
+            <member name="Description" type="data" />
+            <member name="ListOrder" type="data" />
+            <member name="Retired" type="data" />
+            <member name="IsDefault" type="data" />
+            <hide pos_x="407" pos_y="939" show_base_members="1" />
+        </class>
+        <class name="CI_Type" left="345" top="562" right="479" bottom="652">
+            <member name="Description" type="data" />
+            <member name="ListOrder" type="data" />
+            <member name="Retired" type="data" />
+            <member name="IsDefault" type="data" />
+            <hide pos_x="113" pos_y="512" show_base_members="1" />
+        </class>
+        <link_join name="AssignedTo" class="CI_Issue" target="stdUser" />
+        <link_join name="Organization" class="CI_Issue" target="Store" />
+        <link_join name="Consultant" class="LocationVisit" target="stdUser" />
+        <link_join name="Status" class="LocationVisit" target="pikActivityStatus" />
+        <link_join name="CallType" class="LocationVisit" target="pikCallType" />
+        <link_join name="Rep" class="AS_UserAssignments" target="stdUser" />
+        <link_join name="Territory" class="AS_UserAssignments" target="AS_Territory" />
+        <link_join name="PrimaryRep" class="AS_Territory" target="stdUser" />
+        <link_join name="Assignee" class="AS_TerritoryAssignment" target="Store" />
+        <link_join name="Territory" class="AS_TerritoryAssignment" target="AS_Territory" />
+        <link_join name="Status" class="CI_History" target="CI_Status" />
+        <link_join name="Category" class="CI_OutcomeCategory" target="CI_Category" />
+        <link_join name="Outcome" class="CI_OutcomeCategory" target="CI_Outcome" />
+        <link_join name="stdUser" class="CI_ReadIssue" target="stdUser" />
+        <link_join name="Issue" class="CI_ReadIssue" target="CI_Issue" />
+        <link_join name="Category" class="CI_Subcategory" target="CI_Category" />
+        <link_join name="Category" class="CI_Issue" target="CI_Category" />
+        <link_join name="Subcategory" class="CI_Issue" target="CI_Subcategory" />
+        <link_join name="Outcome" class="CI_Issue" target="CI_Outcome" />
+        <link_join name="Status" class="CI_Issue" target="CI_Status" />
+        <link_join name="Type" class="CI_Issue" target="CI_Type" />
+        <link_join name="Type" class="CI_Category" target="CI_Type" />
+        <hide name="stdPersonName" pos_x="219" pos_y="61" show_base_members="1" />
+    </class_diagram>
+    <TargetPlatforms>1</TargetPlatforms>
+    <DefaultScriptLang>VBdotNET</DefaultScriptLang>
+    <IndexConfigurations>
+        <Configuration Name="Server" />
+        <Configuration Name="Remote" />
+        <Configuration Name="Mobile" />
+    </IndexConfigurations>
+</AeDesigner_doc>
+%>
